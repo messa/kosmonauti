@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import KosmonautForm from '../components/KosmonautForm'
 
 function IndexPage() {
   return (
@@ -6,6 +7,12 @@ function IndexPage() {
       <Head>
         <title>Kosmonauti</title>
       </Head>
+      <h1>Kosmonauti</h1>
+
+      <KosmonautForm />
+
+
+
     </div>
   )
 }
