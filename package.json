@@ -1,0 +1,19 @@
+{
+  "name": "kosmonauti",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/messa/kosmonauti.git"
+  },
+  "author": "Petr Messner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/messa/kosmonauti/issues"
+  },
+  "homepage": "https://github.com/messa/kosmonauti#readme"
+}
