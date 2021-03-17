@@ -8,6 +8,7 @@ function KosmonautTable({ items, onEditClick, onDeleteClick }) {
           <th>Datum narození</th>
           <th>Superschopnost</th>
           <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
