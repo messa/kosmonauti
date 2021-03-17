@@ -1,4 +1,4 @@
-import { useReducer } from 'react'
+import { useReducer, useState } from 'react'
 import KosmonautForm from './KosmonautForm'
 import KosmonautTable from './KosmonautTable'
 
@@ -16,15 +16,29 @@ function KosmonautListing() {
   const localStorageKey = 'cosmonauts'
   const localStorageData = typeof window === 'undefined' ? null : window.localStorage.getItem(localStorageKey)
   const cosmonauts = localStorageData ? JSON.parse(localStorageData) : defaultCosmonauts
+
+  const [ editedIndex, setEditedIndex ] = useState(null)
+
   const handleKosmnautFormSubmit = (cosmonaut) => {
-    const newCosmonauts = [...cosmonauts, cosmonaut]
+    const newCosmonauts = [...cosmonauts]
+    if (editedIndex === null) {
+      newCosmonauts.push(cosmonaut)
+    } else {
+      newCosmonauts[editedIndex] = cosmonaut
+    }
     window.localStorage.setItem(localStorageKey, JSON.stringify(newCosmonauts))
+    setEditedIndex(null)
     forceUpdate()
   }
+
+  const onEditClick = (index) => {
+    setEditedIndex(index)
+  }
+
   return (
     <div>
-      <KosmonautTable items={cosmonauts} />
-      <KosmonautForm onSubmit={handleKosmnautFormSubmit} />
+      <KosmonautTable items={cosmonauts} onEditClick={onEditClick} />
+      <KosmonautForm key={editedIndex} value={editedIndex === null ? null : cosmonauts[editedIndex]} onSubmit={handleKosmnautFormSubmit} />
     </div>
   )
 }
