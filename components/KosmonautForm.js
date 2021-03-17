@@ -29,25 +29,25 @@ function KosmonautForm({ onSubmit }) {
     <form onSubmit={handleSubmit}>
       <label>
         Jméno:
-        <input type="text" name="name" value={inputValues.name} onChange={handleInputChange} />
+        <input type="text" name="name" value={inputValues.name} onChange={handleInputChange} autoComplete='off' />
       </label>
       <br />
 
       <label>
         Příjmení:
-        <input type="text" id="surname" name="surname" value={inputValues.surname} onChange={handleInputChange} />
+        <input type="text" id="surname" name="surname" value={inputValues.surname} onChange={handleInputChange} autoComplete='off' />
       </label>
       <br />
 
       <label>
         Datum narození:
-        <input type="date" name="date" value={inputValues.date} onChange={handleInputChange} />
+        <input type="date" name="date" value={inputValues.date} onChange={handleInputChange} autoComplete='off' />
       </label>
       <br />
 
       <label>
         Superschopnost:
-        <input type="textarea" name="superpower" value={inputValues.superpower} onChange={handleInputChange} />
+        <input type="text" name="superpower" value={inputValues.superpower} onChange={handleInputChange} autoComplete='off' />
       </label>
       <br />
 
