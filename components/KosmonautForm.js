@@ -6,17 +6,25 @@ function KosmonautForm() {
 
   return (
     <form>
-      <label htmlFor="name">Jméno:</label>
-      <input type="text" id="name" name="name" value={inputValues.name} onChange={handleInputChange} />
+      <label>
+        Jméno:
+        <input type="text" name="name" value={inputValues.name} onChange={handleInputChange} />
+      </label>
 
-      <label htmlFor="surname">Příjmení:</label>
-      <input type="text" id="surname" name="surname" value={inputValues.surname} onChange={handleInputChange} />
+      <label>
+        Příjmení:
+        <input type="text" id="surname" name="surname" value={inputValues.surname} onChange={handleInputChange} />
+      </label>
 
-      <label htmlFor="date">Datum narození:</label>
-      <input type="date" id="date" name="date" value={inputValues.date} onChange={handleInputChange} />
+      <label>
+        Datum narození:
+        <input type="date" name="date" value={inputValues.date} onChange={handleInputChange} />
+      </label>
 
-      <label htmlFor="superpower">Superschopnost:</label>
-      <input type="textarea" id="superpower" name="superpower" value={inputValues.superpower} onChange={handleInputChange} />
+      <label>
+        Superschopnost:
+        <input type="textarea" name="superpower" value={inputValues.superpower} onChange={handleInputChange} />
+      </label>
 
       <button type="submit" onClick={addNewAstronaut}>PŘIDAT</button>
       <button type="submit" onClick={saveEditedAstronaut}>ULOŽIT ÚPRAVY</button>
