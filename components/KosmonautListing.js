@@ -35,9 +35,18 @@ function KosmonautListing() {
     setEditedIndex(index)
   }
 
+  const onDeleteClick = (index) => {
+    const newCosmonauts = [...cosmonauts]
+    newCosmonauts.splice(index, 1)
+    window.localStorage.setItem(localStorageKey, JSON.stringify(newCosmonauts))
+    // the editedIndex (if set) has now become invalid so we clear it:
+    setEditedIndex(null)
+    forceUpdate()
+  }
+
   return (
     <div>
-      <KosmonautTable items={cosmonauts} onEditClick={onEditClick} />
+      <KosmonautTable items={cosmonauts} onEditClick={onEditClick} onDeleteClick={onDeleteClick} />
       <KosmonautForm key={editedIndex} value={editedIndex === null ? null : cosmonauts[editedIndex]} onSubmit={handleKosmnautFormSubmit} />
     </div>
   )
