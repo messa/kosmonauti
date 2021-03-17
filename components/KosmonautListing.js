@@ -6,6 +6,7 @@ const defaultCosmonauts = [
   {
     name: 'Jurij',
     surname: 'Gagarin',
+    birthDate: '1934-03-09',
     superpower: 'first',
   }
 ]
@@ -47,7 +48,12 @@ function KosmonautListing() {
   return (
     <div>
       <KosmonautTable items={cosmonauts} onEditClick={onEditClick} onDeleteClick={onDeleteClick} />
-      <KosmonautForm key={editedIndex} value={editedIndex === null ? null : cosmonauts[editedIndex]} onSubmit={handleKosmnautFormSubmit} />
+      <KosmonautForm
+        key={editedIndex}
+        isEdit={editedIndex !== null}
+        value={editedIndex === null ? null : cosmonauts[editedIndex]}
+        onSubmit={handleKosmnautFormSubmit}
+        />
     </div>
   )
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 // https://reactjs.org/docs/forms.html
 
-function KosmonautForm({ value, onSubmit }) {
+function KosmonautForm({ isEdit, value, onSubmit }) {
   const [ inputValues, setInputValues ] = useState(value || {})
 
   const handleInputChange = (event) => {
@@ -20,7 +20,7 @@ function KosmonautForm({ value, onSubmit }) {
 
   return (
     <div>
-      <h3>Přidat nového kosmonauta</h3>
+      <h3>{isEdit ? 'Úprava kosmonauta' : 'Přidat nového kosmonauta'}</h3>
       <form onSubmit={handleSubmit}>
         <label>
           Jméno:
@@ -36,7 +36,7 @@ function KosmonautForm({ value, onSubmit }) {
 
         <label>
           Datum narození:
-          <input type="date" name="date" value={inputValues.date || ''} onChange={handleInputChange} autoComplete='off' />
+          <input type="date" name="birthDate" value={inputValues.birthDate || ''} onChange={handleInputChange} autoComplete='off' />
         </label>
         <br />
 
@@ -46,7 +46,7 @@ function KosmonautForm({ value, onSubmit }) {
         </label>
         <br />
 
-        <button type="submit">ULOŽIT</button>
+        <button type="submit">{isEdit ? 'Uložit' : 'Přidat'}</button>
       </form>
     </div>
   )
