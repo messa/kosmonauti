@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import KosmonautForm from '../components/KosmonautForm'
+import KosmonautListing from '../components/KosmonautListing'
 
 function IndexPage() {
   return (
@@ -8,11 +8,7 @@ function IndexPage() {
         <title>Kosmonauti</title>
       </Head>
       <h1>Kosmonauti</h1>
-
-      <KosmonautForm onSubmit={v => console.debug(v)} />
-
-
-
+      <KosmonautListing />
     </div>
   )
 }
