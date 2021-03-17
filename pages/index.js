@@ -9,7 +9,7 @@ function IndexPage() {
       </Head>
       <h1>Kosmonauti</h1>
 
-      <KosmonautForm />
+      <KosmonautForm onSubmit={v => console.debug(v)} />
 
 
 
