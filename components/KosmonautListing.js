@@ -14,8 +14,10 @@ const defaultCosmonauts = [
 function KosmonautListing() {
   const [, forceUpdate ] = useReducer(x => x + 1, 0)
   // ^^^ https://reactjs.org/docs/hooks-faq.html#is-there-something-like-forceupdate
+
   const localStorageKey = 'cosmonauts'
   const localStorageData = typeof window === 'undefined' ? null : window.localStorage.getItem(localStorageKey)
+  // ^^^ kdyby se tato komponena náhodou renderovala na serveru (SSR), tak musíme ošetřit, že tam žádné window není
   const cosmonauts = localStorageData ? JSON.parse(localStorageData) : defaultCosmonauts
 
   const [ editedIndex, setEditedIndex ] = useState(null)
