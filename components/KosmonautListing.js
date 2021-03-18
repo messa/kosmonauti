@@ -17,7 +17,7 @@ function KosmonautListing() {
 
   const localStorageKey = 'cosmonauts'
   const localStorageData = typeof window === 'undefined' ? null : window.localStorage.getItem(localStorageKey)
-  // ^^^ kdyby se tato komponena náhodou renderovala na serveru (SSR), tak musíme ošetřit, že tam žádné window není
+  // ^^^ kdyby se tato komponenta náhodou renderovala na serveru (SSR), tak musíme ošetřit, že tam žádné window není
   const cosmonauts = localStorageData ? JSON.parse(localStorageData) : defaultCosmonauts
 
   const [ editedIndex, setEditedIndex ] = useState(null)
