@@ -1,59 +1,57 @@
-import { useReducer, useState } from 'react'
+import { useEffect, useState } from 'react'
 import KosmonautForm from './KosmonautForm'
 import KosmonautTable from './KosmonautTable'
 
-const defaultCosmonauts = [
-  {
-    name: 'Jurij',
-    surname: 'Gagarin',
-    birthDate: '1934-03-09',
-    superpower: 'first',
-  }
-]
-
 function KosmonautListing() {
-  const [, forceUpdate ] = useReducer(x => x + 1, 0)
-  // ^^^ https://reactjs.org/docs/hooks-faq.html#is-there-something-like-forceupdate
+  const [ cosmonauts, setCosmonauts ] = useState(null)
+  const [ editedId, setEditedId ] = useState(null)
 
-  const localStorageKey = 'cosmonauts'
-  const localStorageData = typeof window === 'undefined' ? null : window.localStorage.getItem(localStorageKey)
-  // ^^^ kdyby se tato komponenta náhodou renderovala na serveru (SSR), tak musíme ošetřit, že tam žádné window není
-  const cosmonauts = localStorageData ? JSON.parse(localStorageData) : defaultCosmonauts
+  useEffect(async () => {
+    const res = await fetch('/api/cosmonauts/list-all')
+    const { cosmonauts } = await res.json()
+    setCosmonauts(cosmonauts)
+  }, [])
 
-  const [ editedIndex, setEditedIndex ] = useState(null)
-
-  const handleKosmnautFormSubmit = (cosmonaut) => {
-    const newCosmonauts = [...cosmonauts]
-    if (editedIndex === null) {
-      newCosmonauts.push(cosmonaut)
+  const handleKosmnautFormSubmit = async (cosmonaut) => {
+    if (editedId === null) {
+      const res = await fetch('/api/cosmonauts/insert-new', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cosmonaut }),
+       })
+      const { cosmonauts } = await res.json()
+      setCosmonauts(cosmonauts)
     } else {
-      newCosmonauts[editedIndex] = cosmonaut
+      const res = await fetch('/api/cosmonauts/update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cosmonaut }),
+       })
+      const { cosmonauts } = await res.json()
+      setCosmonauts(cosmonauts)
+      setEditedId(null)
     }
-    window.localStorage.setItem(localStorageKey, JSON.stringify(newCosmonauts))
-    setEditedIndex(null)
-    forceUpdate()
   }
 
-  const onEditClick = (index) => {
-    setEditedIndex(index)
+  const onEditClick = (cosmonautId) => {
+    setEditedId(cosmonautId)
   }
 
-  const onDeleteClick = (index) => {
-    const newCosmonauts = [...cosmonauts]
-    newCosmonauts.splice(index, 1)
-    window.localStorage.setItem(localStorageKey, JSON.stringify(newCosmonauts))
-    // the editedIndex (if set) has now become invalid so we clear it:
-    setEditedIndex(null)
-    forceUpdate()
+  const onDeleteClick = (cosmonautId) => {
+    // TODO: implement delete
+    // the editedId (if set) has now become invalid so we clear it:
+    setEditedId(null)
   }
 
   return (
     <div>
-      <KosmonautTable items={cosmonauts} onEditClick={onEditClick} onDeleteClick={onDeleteClick} />
+      {cosmonauts && (
+        <KosmonautTable items={cosmonauts} onEditClick={onEditClick} onDeleteClick={onDeleteClick} />
+      )}
       <KosmonautForm
-        key={editedIndex}
-        isEdit={editedIndex !== null}
-        value={editedIndex === null ? null : cosmonauts[editedIndex]}
+        key={editedId}
+        isEdit={editedId !== null}
+        value={editedId === null ? null : cosmonauts.find(c => c.id === editedId)}
         onSubmit={handleKosmnautFormSubmit}
         />
     </div>

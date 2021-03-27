@@ -18,8 +18,8 @@ function KosmonautTable({ items, onEditClick, onDeleteClick }) {
             <td>{item.surname}</td>
             <td>{item.birthDate}</td>
             <td>{item.superpower}</td>
-            <td><button onClick={() => onEditClick(i)}>edit</button></td>
-            <td><button onClick={() => onDeleteClick(i)}>delete</button></td>
+            <td><button onClick={() => onEditClick(item.id)}>edit</button></td>
+            <td><button onClick={() => onDeleteClick(item.id)}>delete</button></td>
           </tr>
         ))}
       </tbody>
