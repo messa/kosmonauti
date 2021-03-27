@@ -45,6 +45,9 @@ function KosmonautListing() {
 
   return (
     <div>
+      {cosmonauts === null && (
+        <p>Loading...</p>
+      )}
       {cosmonauts && (
         <KosmonautTable items={cosmonauts} onEditClick={onEditClick} onDeleteClick={onDeleteClick} />
       )}
