@@ -1,4 +1,4 @@
-const MongoClient = require('mongodb').MongoClient;
+import { MongoClient } from 'mongodb'
 
 async function getClient() {
   const uri = process.env.MONGODB_URI
@@ -15,7 +15,7 @@ const clientPromise = getClient()
 export default async function handler(req, res) {
   try {
     const client = await clientPromise
-    const db = await client.db()
+    const db = client.db()
     await db.collection('things').insertOne({ hello: 'World!' })
     const collections = await db.listCollections({}, { nameOnly: true }).toArray()
     const { databases } = await db.admin().listDatabases()
